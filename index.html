@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id" translate="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google" content="notranslate">
+<title>Web Kilat | Pembuatan Web Cepat dan Akurat</title>
+<meta name="description" content="Web Kilat membuat website portofolio, profil diri, dan landing page sederhana dengan cepat dan akurat.">
+<style>
+:root{--bg:#1a1a1a;--card:#242424;--line:#333;--text:#f2f2f2;--muted:#a9a9a9;--cyan:#00c8ff;--coral:#e53935}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;line-height:1.65;min-height:100vh}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+
+header{position:sticky;top:0;z-index:10;background:rgba(26,26,26,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 12px}
+.brand{font-weight:800;font-size:1.2rem;background:none;border:0;color:var(--text);cursor:pointer}
+.brand b{color:var(--cyan)}
+nav{display:flex;gap:4px;order:3;width:100%}
+nav button{flex:1;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:inherit;font-weight:600;padding:8px 4px;cursor:pointer;transition:color .2s,border-color .2s}
+nav button:hover{color:var(--text)}
+nav button[aria-current="page"]{color:var(--cyan);border-color:var(--cyan)}
+.order{display:inline-block;text-decoration:none;background:var(--coral);color:#fff;font-weight:800;letter-spacing:1px;padding:9px 20px;border-radius:999px;transition:transform .2s,box-shadow .2s,background .2s}
+.order:hover,.order:active{background:#ff5a4f;transform:translateY(-2px);box-shadow:0 8px 22px rgba(229,57,53,.45)}
+.order.big{font-size:1.35rem;padding:18px 48px;display:block;max-width:420px;margin:28px auto 0;text-align:center}
+
+main{max-width:1000px;margin:0 auto;padding:32px 16px 56px}
+.page{display:none}
+.page.active{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+h1{font-size:clamp(1.9rem,6vw,3.2rem);line-height:1.15;margin-bottom:14px}
+h1 em{font-style:normal;color:var(--cyan)}
+h2{font-size:clamp(1.4rem,4vw,2rem);margin-bottom:10px}
+.lead{color:var(--muted);max-width:60ch;margin-bottom:28px}
+
+.hero{display:grid;gap:20px}
+.hero figure{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#222}
+.hero img{display:block;width:100%;height:auto}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .2s,border-color .2s}
+.card:hover,.card:active{transform:translateY(-3px);border-color:var(--cyan)}
+.thumb{aspect-ratio:4/3;background:#2b2b2b;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;text-align:center;padding:8px}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.card div.info{padding:10px 12px 14px}
+.card h3{font-size:.95rem;margin-bottom:2px}
+.card p{color:var(--muted);font-size:.82rem;line-height:1.45}
+
+.notice{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--coral);border-radius:12px;padding:20px 22px;max-width:68ch}
+.notice strong{color:var(--coral)}
+.list{margin:26px 0 0;padding-left:20px;color:var(--muted);max-width:60ch}
+.list li{margin-bottom:6px}
+.list b{color:var(--text)}
+.cta{margin-top:32px;text-align:center}
+.cta p{color:var(--muted)}
+.note-small{color:var(--muted);font-size:.85rem;margin-top:18px}
+
+footer{border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:.9rem;padding:22px 16px 90px}
+
+@media(min-width:720px){
+  .bar{flex-wrap:nowrap}
+  nav{order:0;width:auto}
+  nav button{flex:none;padding:10px 18px}
+  .hero{grid-template-columns:1fr 1.25fr}
+  .grid{grid-template-columns:repeat(4,1fr);gap:16px}
+  footer{padding-bottom:28px}
+  .fab{display:none}
+}
+@media(max-width:719px){
+  .fab{position:fixed;left:16px;right:16px;bottom:14px;z-index:9;text-align:center;padding:14px;font-size:1.05rem;box-shadow:0 10px 30px rgba(0,0,0,.6)}
+  .bar .order{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <button class="brand" data-go="beranda" aria-label="Ke beranda">Web <b>Kilat</b></button>
+    <a class="order" href="https://wa.me/6285134132562?text=Halo%20Web%20Kilat,%20saya%20ingin%20memesan%20pembuatan%20website%20sederhana." target="_blank" rel="noopener">ORDER</a>
+    <nav aria-label="Menu utama">
+      <button data-go="beranda">Beranda</button>
+      <button data-go="portofolio">Portofolio</button>
+      <button data-go="deskripsi">Deskripsi</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="beranda" class="page" aria-label="Beranda">
+    <h1>Halo, saya <em>Web Kilat</em>.</h1>
+    <p class="lead">Saya membuat website sederhana untuk portofolio, profil diri, dan landing page. Prosesnya cepat, hasilnya rapi, dan sesuai kebutuhan Anda.</p>
+    <div class="hero">
+      <figure><img src="foto1.png" alt="Logo Web Kilat berbentuk huruf W dan K"></figure>
+      <figure><img src="foto2.png" alt="Pembuatan web cepat dan akurat"></figure>
+    </div>
+  </section>
+
+  <section id="portofolio" class="page" aria-label="Portofolio">
+    <h2>Contoh Tampilan Website</h2>
+    <p class="lead">Berikut contoh gaya website satu halaman yang bisa dibuat. Ketuk salah satu untuk melihat contoh aslinya.</p>
+    <div class="grid" id="galeri"></div>
+    <p class="note-small">Contoh di atas adalah referensi gaya tampilan dari template gratis, bukan hasil karya Web Kilat.</p>
+  </section>
+
+  <section id="deskripsi" class="page" aria-label="Deskripsi layanan">
+    <h2>Layanan Web Kilat</h2>
+    <p class="lead">Saya fokus pada website yang ringan, jelas, dan selesai tepat waktu.</p>
+    <div class="notice">
+      <p><strong>Pengumuman:</strong> Kami hanya membuat teks website sederhana portofolio, profil diri, atau landing page interaktif secara cepat dan akurat. Kami tidak melayani pembuatan sistem web yang rumit atau aplikasi skala besar.</p>
+    </div>
+    <ul class="list">
+      <li><b>Website portofolio</b> untuk menampilkan karya Anda.</li>
+      <li><b>Profil diri atau usaha</b> yang rapi dan mudah dibaca.</li>
+      <li><b>Landing page</b> sederhana untuk promosi.</li>
+    </ul>
+    <div class="cta">
+      <p>Tertarik? Kirim pesan lewat WhatsApp.</p>
+      <a class="order big" href="https://wa.me/6285134132562?text=Halo%20Web%20Kilat,%20saya%20ingin%20memesan%20pembuatan%20website%20sederhana." target="_blank" rel="noopener">ORDER</a>
+    </div>
+  </section>
+</main>
+
+<footer>Web Kilat &copy; 2026</footer>
+
+<a class="order fab" href="https://wa.me/6285134132562?text=Halo%20Web%20Kilat,%20saya%20ingin%20memesan%20pembuatan%20website%20sederhana." target="_blank" rel="noopener">ORDER</a>
+
+<script>
+(function(){
+  var pages=["beranda","portofolio","deskripsi"];
+  var base="https://startbootstrap.github.io/startbootstrap-";
+  var items=[
+    ["Profil Perusahaan","Halaman jasa dan tim yang tertata.","agency"],
+    ["Portofolio Freelancer","Galeri karya dengan tampilan bersih.","freelancer"],
+    ["Landing Page Kreatif","Satu halaman promosi yang menarik.","creative"],
+    ["Landing Page Minimalis","Tampilan gelap sederhana dan elegan.","grayscale"],
+    ["Promosi Produk","Halaman penawaran dengan ajakan jelas.","landing-page"],
+    ["Promosi Aplikasi","Cocok untuk memperkenalkan aplikasi HP.","new-age"],
+    ["Portofolio Menu Samping","Navigasi samping, nyaman di layar besar.","stylish-portfolio"],
+    ["CV Online","Profil diri dan pengalaman dalam satu halaman.","resume"]
+  ];
+  document.getElementById("galeri").innerHTML=items.map(function(i){
+    var url=base+i[2]+"/";
+    var shot="https://image.thum.io/get/width/600/crop/450/"+url;
+    return '<a class="card" href="'+url+'" target="_blank" rel="noopener">'
+      +'<div class="thumb"><img src="'+shot+'" alt="Contoh tampilan '+i[0]+'" loading="lazy" onerror="this.remove()">'+'</div>'
+      +'<div class="info"><h3>'+i[0]+'</h3><p>'+i[1]+'</p></div></a>';
+  }).join("");
+
+  function show(id,push){
+    if(pages.indexOf(id)<0)id="beranda";
+    pages.forEach(function(p){document.getElementById(p).classList.toggle("active",p===id)});
+    document.querySelectorAll("nav button").forEach(function(b){
+      if(b.dataset.go===id)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");
+    });
+    if(push)history.replaceState(null,"","#"+id);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  document.querySelectorAll("[data-go]").forEach(function(b){
+    b.addEventListener("click",function(){show(b.dataset.go,true)});
+  });
+  window.addEventListener("hashchange",function(){show(location.hash.slice(1),false)});
+  show(location.hash.slice(1),false);
+})();
+</script>
+</body>
+</html>
